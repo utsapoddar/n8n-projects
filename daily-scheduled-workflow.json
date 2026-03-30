@@ -224,7 +224,7 @@
       ],
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
-      "webhookId": "bbdf2934-385a-4057-9030-2a1569b8deaf"
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "credentials": {
@@ -247,7 +247,7 @@
       ],
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
-      "webhookId": "852f7a78-048e-4f03-954b-589a9d499031"
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "credentials": {
@@ -271,7 +271,7 @@
       ],
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
-      "webhookId": "592f52fd-b4db-453e-b274-c93a64fd3d8f"
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "name": "Daily @ 20:00",
@@ -466,49 +466,6 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "shared": [
-    {
-      "project": {
-        "description": null,
-        "icon": null,
-        "name": "Utsa Poddar <utsapoddarjobs@gmail.com>",
-        "projectRelations": [
-          {
-            "projectId": "b4yLNpicrf5hyXXM",
-            "user": {
-              "disabled": false,
-              "email": "utsapoddarjobs@gmail.com",
-              "firstName": "Utsa",
-              "isPending": false,
-              "lastActiveAt": "2025-10-15",
-              "lastName": "Poddar",
-              "mfaEnabled": false,
-              "personalizationAnswers": {
-                "companyType": "personal",
-                "personalization_survey_n8n_version": "1.115.3",
-                "personalization_survey_submitted_at": "2025-10-15T03:28:59.699Z",
-                "reportedSource": "google"
-              },
-              "settings": {
-                "dismissedCallouts": {
-                  "preBuiltAgentsCalloutGoogleCalendar": true
-                },
-                "easyAIWorkflowOnboarded": true,
-                "firstSuccessfulWorkflowId": "RJ56eMPXOhiTrqPG",
-                "userActivated": true,
-                "userActivatedAt": 1760506787034
-              }
-            },
-            "userId": "eec12b35-549b-4d08-8ef7-f76f3d8395f3"
-          }
-        ],
-        "type": "personal"
-      },
-      "projectId": "b4yLNpicrf5hyXXM",
-      "role": "workflow:owner",
-      "workflowId": "b6D2Kv8tXqmiY0KB"
-    }
-  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,

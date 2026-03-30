@@ -92,17 +92,17 @@
       "parameters": {
         "channelId": {
           "__rl": true,
-          "cachedResultName": "simsy-uriel-chem-30",
-          "cachedResultUrl": "https://discord.com/channels/1427815452943319082/1427823015231492266",
+          "cachedResultName": "example-channel",
+          "cachedResultUrl": "https://discord.com/channels/YOUR_GUILD_ID/YOUR_CHANNEL_ID",
           "mode": "list",
-          "value": "1427823015231492266"
+          "value": "YOUR_CHANNEL_ID"
         },
         "guildId": {
           "__rl": true,
           "cachedResultName": "Demo server",
-          "cachedResultUrl": "https://discord.com/channels/1427815452943319082",
+          "cachedResultUrl": "https://discord.com/channels/YOUR_GUILD_ID",
           "mode": "list",
-          "value": "1427815452943319082"
+          "value": "YOUR_GUILD_ID"
         },
         "operation": "getAll",
         "options": {},
@@ -114,7 +114,7 @@
       ],
       "type": "n8n-nodes-base.discord",
       "typeVersion": 2,
-      "webhookId": "83a62d81-2b1c-428e-ae70-442b0d5792a6"
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "credentials": {
@@ -126,9 +126,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "cachedResultName": "utsapoddarjobs@gmail.com",
+          "cachedResultName": "your-email@example.com",
           "mode": "list",
-          "value": "utsapoddarjobs@gmail.com"
+          "value": "your-email@example.com"
         },
         "operation": "getAll",
         "options": {},
@@ -183,7 +183,7 @@
         "hasOutputParser": true,
         "options": {},
         "promptType": "define",
-        "text": "You are an extractor that reads short commands about tutoring sessions and outputs STRICT JSON for downstream nodes.\n\nContext:\n- Trigger phrases: “Event Update - Session Cancelled” or “Event Update - Session Scheduled”.\n- Messages will often include date/time and a short reason (for cancellations).\n- Channel names usually look like: student-name | teacher-name\n- Channel topic may include: studentEmail, teacherEmail, parentEmail, regular session time, etc.\n- If server/channel IDs are provided upstream, just pass them through; otherwise leave them empty strings \"\".\n\nRequired behavior:\n1) Detect action:\n   - If the text starts with “Event Update - Session Scheduled”, set action=\"DISCORD_EVENT_UPDATE\", eventType=\"SCHEDULED\".\n   - If it starts with “Event Update - Session Cancelled”, set action=\"DISCORD_EVENT_UPDATE\", eventType=\"CANCELLED\".\n\n2) Extract fields when present:\n   - sessionDate (YYYY-MM-DD)\n   - sessionStart (HH:mm, 24h)\n   - sessionEnd (HH:mm, 24h)\n   - reason (string; only for CANCELLED)\n   - studentName (from message or channel name)\n   - teacherName (from message or channel name)\n   - studentEmail, teacherEmail, parentEmail (from channel topic if present)\n   - calendarId (\"primary\" by default unless explicitly given)\n   - serverId, channelId (if provided upstream)\n   - timezone (\"America/Edmonton\" by default)\n\n3) If you can’t find a piece of data, output an empty string \"\" for that field.\n\n4) For any non-trigger message, set:\n   action=\"IGNORE\", eventType=\"\", reason=\"\".\n\nReturn ONLY this JSON object, nothing else:\n{\n  \"action\": \"DISCORD_EVENT_UPDATE\" | \"DAILY_SUMMARY\" | \"IGNORE\",\n  \"eventType\": \"SCHEDULED\" | \"CANCELLED\" | \"\",\n  \"sessionDate\": \"YYYY-MM-DD\",\n  \"sessionStart\": \"HH:mm\",\n  \"sessionEnd\": \"HH:mm\",\n  \"reason\": \"\",\n  \"studentName\": \"\",\n  \"teacherName\": \"\",\n  \"studentEmail\": \"\",\n  \"teacherEmail\": \"\",\n  \"parentEmail\": \"\",\n  \"calendarId\": \"primary\",\n  \"serverId\": \"\",\n  \"channelId\": \"\",\n  \"timezone\": \"America/Edmonton\"\n}\n\nExamples:\n\nINPUT:\nEvent Update - Session Cancelled | 2025-10-16 17:00-18:00 | Student: Alex Chen | Reason: Sick\nOUTPUT:\n{\"action\":\"DISCORD_EVENT_UPDATE\",\"eventType\":\"CANCELLED\",\"sessionDate\":\"2025-10-16\",\"sessionStart\":\"17:00\",\"sessionEnd\":\"18:00\",\"reason\":\"Sick\",\"studentName\":\"Alex Chen\",\"teacherName\":\"\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\n\nINPUT:\nEvent Update - Session Scheduled | 2025-10-20 15:30-16:30 | Student: Maya S | Teacher: Mr. D | Calendar: primary\nOUTPUT:\n{\"action\":\"DISCORD_EVENT_UPDATE\",\"eventType\":\"SCHEDULED\",\"sessionDate\":\"2025-10-20\",\"sessionStart\":\"15:30\",\"sessionEnd\":\"16:30\",\"reason\":\"\",\"studentName\":\"Maya S\",\"teacherName\":\"Mr. D\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\n\nINPUT:\nrandom chatter\nOUTPUT:\n{\"action\":\"IGNORE\",\"eventType\":\"\",\"sessionDate\":\"\",\"sessionStart\":\"\",\"sessionEnd\":\"\",\"reason\":\"\",\"studentName\":\"\",\"teacherName\":\"\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\nReturn ONLY a single JSON object matching the example (no code fences, no text)\nCRITICAL FORMAT RULES:\n- Output only a single JSON object (no markdown, no code fences, no backticks, no explanations).\n- Include all keys shown in the example (even if values are empty strings).\n- Use eventType \"NONE\" when not applicable.\n\nInput message:\n{{$json.content}}\n\nChannel name: {{$json.channel.name || ''}}\nChannel ID: {{$json.channel_id || ''}}\nServer ID: {{$json.guild_id || ''}}\n\nReturn ONLY a single JSON object matching the output schema."
+        "text": "You are an extractor that reads short commands about tutoring sessions and outputs STRICT JSON for downstream nodes.\n\nContext:\n- Trigger phrases: \u201cEvent Update - Session Cancelled\u201d or \u201cEvent Update - Session Scheduled\u201d.\n- Messages will often include date/time and a short reason (for cancellations).\n- Channel names usually look like: student-name | teacher-name\n- Channel topic may include: studentEmail, teacherEmail, parentEmail, regular session time, etc.\n- If server/channel IDs are provided upstream, just pass them through; otherwise leave them empty strings \"\".\n\nRequired behavior:\n1) Detect action:\n   - If the text starts with \u201cEvent Update - Session Scheduled\u201d, set action=\"DISCORD_EVENT_UPDATE\", eventType=\"SCHEDULED\".\n   - If it starts with \u201cEvent Update - Session Cancelled\u201d, set action=\"DISCORD_EVENT_UPDATE\", eventType=\"CANCELLED\".\n\n2) Extract fields when present:\n   - sessionDate (YYYY-MM-DD)\n   - sessionStart (HH:mm, 24h)\n   - sessionEnd (HH:mm, 24h)\n   - reason (string; only for CANCELLED)\n   - studentName (from message or channel name)\n   - teacherName (from message or channel name)\n   - studentEmail, teacherEmail, parentEmail (from channel topic if present)\n   - calendarId (\"primary\" by default unless explicitly given)\n   - serverId, channelId (if provided upstream)\n   - timezone (\"America/Edmonton\" by default)\n\n3) If you can\u2019t find a piece of data, output an empty string \"\" for that field.\n\n4) For any non-trigger message, set:\n   action=\"IGNORE\", eventType=\"\", reason=\"\".\n\nReturn ONLY this JSON object, nothing else:\n{\n  \"action\": \"DISCORD_EVENT_UPDATE\" | \"DAILY_SUMMARY\" | \"IGNORE\",\n  \"eventType\": \"SCHEDULED\" | \"CANCELLED\" | \"\",\n  \"sessionDate\": \"YYYY-MM-DD\",\n  \"sessionStart\": \"HH:mm\",\n  \"sessionEnd\": \"HH:mm\",\n  \"reason\": \"\",\n  \"studentName\": \"\",\n  \"teacherName\": \"\",\n  \"studentEmail\": \"\",\n  \"teacherEmail\": \"\",\n  \"parentEmail\": \"\",\n  \"calendarId\": \"primary\",\n  \"serverId\": \"\",\n  \"channelId\": \"\",\n  \"timezone\": \"America/Edmonton\"\n}\n\nExamples:\n\nINPUT:\nEvent Update - Session Cancelled | 2025-10-16 17:00-18:00 | Student: Alex Chen | Reason: Sick\nOUTPUT:\n{\"action\":\"DISCORD_EVENT_UPDATE\",\"eventType\":\"CANCELLED\",\"sessionDate\":\"2025-10-16\",\"sessionStart\":\"17:00\",\"sessionEnd\":\"18:00\",\"reason\":\"Sick\",\"studentName\":\"Alex Chen\",\"teacherName\":\"\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\n\nINPUT:\nEvent Update - Session Scheduled | 2025-10-20 15:30-16:30 | Student: Maya S | Teacher: Mr. D | Calendar: primary\nOUTPUT:\n{\"action\":\"DISCORD_EVENT_UPDATE\",\"eventType\":\"SCHEDULED\",\"sessionDate\":\"2025-10-20\",\"sessionStart\":\"15:30\",\"sessionEnd\":\"16:30\",\"reason\":\"\",\"studentName\":\"Maya S\",\"teacherName\":\"Mr. D\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\n\nINPUT:\nrandom chatter\nOUTPUT:\n{\"action\":\"IGNORE\",\"eventType\":\"\",\"sessionDate\":\"\",\"sessionStart\":\"\",\"sessionEnd\":\"\",\"reason\":\"\",\"studentName\":\"\",\"teacherName\":\"\",\"studentEmail\":\"\",\"teacherEmail\":\"\",\"parentEmail\":\"\",\"calendarId\":\"primary\",\"serverId\":\"\",\"channelId\":\"\",\"timezone\":\"America/Edmonton\"}\nReturn ONLY a single JSON object matching the example (no code fences, no text)\nCRITICAL FORMAT RULES:\n- Output only a single JSON object (no markdown, no code fences, no backticks, no explanations).\n- Include all keys shown in the example (even if values are empty strings).\n- Use eventType \"NONE\" when not applicable.\n\nInput message:\n{{$json.content}}\n\nChannel name: {{$json.channel.name || ''}}\nChannel ID: {{$json.channel_id || ''}}\nServer ID: {{$json.guild_id || ''}}\n\nReturn ONLY a single JSON object matching the output schema."
       },
       "position": [
         0,
@@ -244,49 +244,6 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "shared": [
-    {
-      "project": {
-        "description": null,
-        "icon": null,
-        "name": "Utsa Poddar <utsapoddarjobs@gmail.com>",
-        "projectRelations": [
-          {
-            "projectId": "b4yLNpicrf5hyXXM",
-            "user": {
-              "disabled": false,
-              "email": "utsapoddarjobs@gmail.com",
-              "firstName": "Utsa",
-              "isPending": false,
-              "lastActiveAt": "2025-10-15",
-              "lastName": "Poddar",
-              "mfaEnabled": false,
-              "personalizationAnswers": {
-                "companyType": "personal",
-                "personalization_survey_n8n_version": "1.115.3",
-                "personalization_survey_submitted_at": "2025-10-15T03:28:59.699Z",
-                "reportedSource": "google"
-              },
-              "settings": {
-                "dismissedCallouts": {
-                  "preBuiltAgentsCalloutGoogleCalendar": true
-                },
-                "easyAIWorkflowOnboarded": true,
-                "firstSuccessfulWorkflowId": "RJ56eMPXOhiTrqPG",
-                "userActivated": true,
-                "userActivatedAt": 1760506787034
-              }
-            },
-            "userId": "eec12b35-549b-4d08-8ef7-f76f3d8395f3"
-          }
-        ],
-        "type": "personal"
-      },
-      "projectId": "b4yLNpicrf5hyXXM",
-      "role": "workflow:owner",
-      "workflowId": "RJ56eMPXOhiTrqPG"
-    }
-  ],
   "staticData": {
     "node:Every minute": {
       "recurrenceRules": []
